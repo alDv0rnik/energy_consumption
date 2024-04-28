@@ -44,14 +44,17 @@ def build_buttons(*args):
 
 
 def calculate_energy():
-    power = int(input_entry1.get()) / 1000
-    operating_time = int(input_entry2.get())
-    energy_cost = float(input_entry3.get())
-
-    consumption = power * operating_time
-    total_cost = consumption * energy_cost
-    result_consumption.set(f"Энергопотребление: {round(consumption, 4)} кВт × ч")
-    result_total_cost.set(f"Стоимость потребленной энергии: {round(total_cost, 4)} рублей за кВт × ч")
+    try:
+        power = int(input_entry1.get()) / 1000
+        operating_time = int(input_entry2.get())
+        energy_cost = float(input_entry3.get())
+    except ValueError:
+        result_consumption.set("ОШИБКА: Неправильный формат входных данных")
+    else:
+        consumption = power * operating_time
+        total_cost = consumption * energy_cost
+        result_consumption.set(f"Энергопотребление: {round(consumption, 4)} кВт × ч")
+        result_total_cost.set(f"Стоимость потребленной энергии: {round(total_cost, 4)} рублей за кВт × ч")
 
 
 def clear_entries():
